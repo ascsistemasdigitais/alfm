@@ -473,3 +473,111 @@ body.interna main{animation:entrar .5s var(--ease) both}
   }
   .dropdown-menu a:hover{background:transparent;color:var(--cyan)}
 }
+
+/* ============================================================
+   PLAYER DE ÁUDIO — escopo isolado, não mexe no layout do site
+   ============================================================ */
+#audioApresentacao{
+  position:relative;
+  overflow:hidden;
+  cursor:default;
+  aspect-ratio:16/9;
+  min-height:400px;
+  background:#0e1b26;
+  border-radius:18px;
+}
+
+/* --- camadas de fundo --- */
+#audioApresentacao .av-bg,
+#audioApresentacao .av-shade{ position:absolute; inset:0; pointer-events:none; }
+#audioApresentacao .av-bg{
+  background-size:cover;
+  background-position:center;
+  transition:transform 10s ease;
+}
+#audioApresentacao.playing .av-bg{ transform:scale(1.05); }
+#audioApresentacao .av-shade{
+  background:linear-gradient(165deg, rgba(14,27,38,.86) 0%, rgba(14,27,38,.55) 55%, rgba(14,27,38,.9) 100%);
+}
+
+/* --- conteúdo do player --- */
+#audioApresentacao .av-ui{
+  position:absolute; inset:0; z-index:2;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:14px;
+  padding:28px 28px 64px; /* respiro para o figcaption original */
+  color:#fff;
+}
+
+/* --- onda sonora --- */
+.av-wave{ display:flex; align-items:center; gap:4px; height:72px; }
+.av-wave span{ width:4px; border-radius:2px; background:var(--accent,#12a5b0); opacity:.45; }
+.av-wave span:nth-child(1){height:22%} .av-wave span:nth-child(2){height:46%}
+.av-wave span:nth-child(3){height:70%} .av-wave span:nth-child(4){height:36%}
+.av-wave span:nth-child(5){height:86%} .av-wave span:nth-child(6){height:56%}
+.av-wave span:nth-child(7){height:40%} .av-wave span:nth-child(8){height:66%}
+.av-wave span:nth-child(9){height:30%} .av-wave span:nth-child(10){height:76%}
+.av-wave span:nth-child(11){height:50%} .av-wave span:nth-child(12){height:86%}
+.av-wave span:nth-child(13){height:40%} .av-wave span:nth-child(14){height:60%}
+.av-wave span:nth-child(15){height:26%}
+#audioApresentacao.playing .av-wave span{ animation:avWave 1.1s ease-in-out infinite; opacity:1; }
+.av-wave span:nth-child(2){animation-delay:.1s} .av-wave span:nth-child(3){animation-delay:.2s}
+.av-wave span:nth-child(4){animation-delay:.3s} .av-wave span:nth-child(5){animation-delay:.4s}
+.av-wave span:nth-child(6){animation-delay:.5s} .av-wave span:nth-child(7){animation-delay:.6s}
+.av-wave span:nth-child(8){animation-delay:.7s} .av-wave span:nth-child(9){animation-delay:.8s}
+.av-wave span:nth-child(10){animation-delay:.9s} .av-wave span:nth-child(11){animation-delay:1s}
+.av-wave span:nth-child(12){animation-delay:1.1s} .av-wave span:nth-child(13){animation-delay:1.2s}
+.av-wave span:nth-child(14){animation-delay:1.3s} .av-wave span:nth-child(15){animation-delay:1.4s}
+@keyframes avWave{ 0%,100%{transform:scaleY(.35)} 50%{transform:scaleY(1)} }
+
+/* --- botões --- */
+.av-controls{ display:flex; align-items:center; gap:14px; }
+.av-play{
+  width:58px; height:58px; border-radius:50%;
+  border:none; cursor:pointer;
+  background:#fff; color:#0e1b26;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  transition:transform .2s;
+}
+.av-play:hover{ transform:scale(1.06); }
+.av-play svg{ width:22px; height:22px; }
+.av-skip{
+  background:rgba(255,255,255,.1); color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:999px; padding:.45rem .8rem;
+  cursor:pointer; font-size:.72rem;
+  transition:background .2s;
+}
+.av-skip:hover{ background:rgba(255,255,255,.22); }
+
+/* --- barra de progresso clicável (volta/avança) --- */
+.av-bar{
+  width:100%; max-width:420px; height:6px; border-radius:3px;
+  background:rgba(255,255,255,.18);
+  cursor:pointer; overflow:hidden;
+}
+.av-fill{ height:100%; width:0%; background:var(--accent,#12a5b0); }
+.av-time{
+  width:100%; max-width:420px;
+  display:flex; justify-content:space-between;
+  font-size:.7rem; opacity:.75;
+}
+
+/* --- rodapé do player --- */
+.av-foot{ display:flex; align-items:center; gap:12px; }
+.av-status{ font-size:.72rem; opacity:.75; letter-spacing:.06em; }
+.av-mute{
+  background:rgba(255,255,255,.1); color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:8px; padding:.45rem .8rem;
+  cursor:pointer; font-size:.72rem;
+  transition:background .2s;
+}
+.av-mute:hover{ background:rgba(255,255,255,.22); }
+
+@media (max-width:640px){
+  #audioApresentacao{ min-height:420px; }
+  #audioApresentacao .av-ui{ padding:20px 16px 60px; }
+}
