@@ -5,21 +5,7 @@
 
 const REDUZIDO = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ✏️ 1) VÍDEO DE APRESENTAÇÃO */
-const VIDEO_APRESENTACAO = {
-  titulo: "Apresentação da plataforma Easy Voting",
-  meta: "INSTITUCIONAL · 02:14",
-  tipo: "arquivo",
-  id: "COLE_AQUI_O_ID_DO_YOUTUBE",
-  arquivo: "videos/apresentacao.mp4"
-  // inicio: 0, fim: 60  ← se quiser exibir só um trecho, adicione estes campos
-};
-
 /* ✏️ 2) GRAVAÇÕES */
-/* thumb  : caminho da imagem de capa (opcional; sem ele usa o Picsum)
-   inicio : segundo em que o vídeo começa (opcional, padrão 0)
-   fim    : segundo em que o vídeo pausa sozinho (opcional; sem ele toca inteiro)
-   Valores em segundos. Ex.: 90 = 1min30 · 600 = 10min */
 const GRAVACOES = [
   { titulo:"AGO — Demonstrações financeiras e destinação do resultado", condominio:"Alvorada S.A.", data:"12/03/2026", duracao:"1:24:10", tag:"AGO", tipo:"arquivo", arquivo:"videos/Bradespar.mp4", thumb:"thumbnails/bradespar-capa.jpg", inicio:0, fim:90, seed:"assembleia-ago-contas" },
   { titulo:"AGE — Reforma do estatuto social", condominio:"Torre Norte Capital", data:"28/02/2026", duracao:"58:32", tag:"AGE", tipo:"youtube", id:"COLE_O_ID_AQUI", seed:"assembleia-age-estatuto" },
@@ -47,7 +33,6 @@ const EMPRESAS = [
   { nome:"Jsl S.A", tag:"Cia. Aberta", logo:"imagens/jsl.png" },
   { nome:"Sanepar", tag:"Cia. Aberta", logo:"imagens/sanepar.png" },
   { nome:"Magazine Luiza", tag:"Cia. Aberta", logo:"imagens/magalu.png" }
-  
 ];
 
 /* ✏️ 4) DEPOIMENTOS (rotação editorial) */
@@ -73,7 +58,6 @@ function buildGrid(){
   const grid = document.getElementById("vgrid");
   if (!grid) return;
   grid.innerHTML = GRAVACOES.map((v,i) => {
-    // Se existir thumb customizado, usa; senão cai no Picsum (placeholder)
     const thumbSrc = v.thumb || `https://picsum.photos/seed/${v.seed}/640/360`;
     return `
       <article class="vcard reveal" data-tag="${v.tag}">
@@ -125,7 +109,6 @@ function abrirVideo(v){
   if (!lb || !lbMedia) return;
 
   if (v.tipo === "youtube" && !ehPlaceholder(v)){
-    // YouTube: os parâmetros start/end limitam o trecho reproduzido
     let url = `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
     if (v.inicio != null) url += `&start=${v.inicio}`;
     if (v.fim    != null) url += `&end=${v.fim}`;
@@ -135,11 +118,9 @@ function abrirVideo(v){
     lbMedia.innerHTML = `<video src="${v.arquivo}" controls autoplay></video>`;
     const vid = lbMedia.querySelector("video");
     if (vid){
-      // Começa no segundo definido
       if (v.inicio != null){
         vid.addEventListener("loadedmetadata", () => { vid.currentTime = v.inicio; });
       }
-      // Pausa sozinho ao chegar no fim do trecho
       if (v.fim != null){
         vid.addEventListener("timeupdate", () => {
           if (vid.currentTime >= v.fim) vid.pause();
@@ -171,11 +152,100 @@ if (lbClose) lbClose.addEventListener("click", fecharVideo);
 if (lb) lb.addEventListener("click", e => { if (e.target === lb) fecharVideo(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") fecharVideo(); });
 
-const frameApr = document.getElementById("videoApresentacao");
-if (frameApr){
-  frameApr.addEventListener("click", () => abrirVideo(VIDEO_APRESENTACAO));
-  frameApr.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirVideo(VIDEO_APRESENTACAO); } });
-}
+/* ============================================================
+   PLAYER DE ÁUDIO DA APRESENTAÇÃO (página plataforma)
+   - Toca automaticamente COM SOM ao abrir (se o navegador deixar)
+   - Se o navegador bloquear, o 1º clique/toque/tecla na página ativa
+   - Botões −10s / +10s e clique na barra para navegar
+   ============================================================ */
+(function initAudioApresentacao(){
+  const audio    = document.getElementById("audioPlayer");
+  const frame    = document.getElementById("audioApresentacao");
+  if (!audio || !frame) return;
+
+  const playBtn  = document.getElementById("audioPlayBtn");
+  const muteBtn  = document.getElementById("audioMuteBtn");
+  const seekBar  = document.getElementById("audioSeek");
+  const fill     = document.getElementById("audioProgress");
+  const curEl    = document.getElementById("audioCurrent");
+  const durEl    = document.getElementById("audioDuration");
+  const statusEl = document.getElementById("audioStatus");
+  const backBtn  = document.getElementById("avBack");
+  const fwdBtn   = document.getElementById("avFwd");
+
+  const fmt = s => (!isFinite(s) || isNaN(s)) ? "0:00"
+    : Math.floor(s/60) + ":" + String(Math.floor(s%60)).padStart(2,"0");
+
+  function paintState(){
+    const tocando = !audio.paused && !audio.ended;
+    frame.classList.toggle("playing", tocando);
+    playBtn.querySelector(".icon-play").style.display  = tocando ? "none"  : "block";
+    playBtn.querySelector(".icon-pause").style.display = tocando ? "block" : "none";
+    playBtn.setAttribute("aria-label", tocando ? "Pausar áudio" : "Reproduzir áudio");
+    if (tocando){
+      statusEl.textContent = audio.muted ? "Tocando no mudo" : "Tocando…";
+    } else {
+      statusEl.textContent = audio.ended ? "Fim — ▶ para ouvir de novo" : "Pausado";
+    }
+  }
+  function paintMute(){
+    muteBtn.textContent = audio.muted ? "🔇 Ativar som" : "🔊 Silenciar";
+  }
+
+  audio.addEventListener("loadedmetadata", () => { durEl.textContent = fmt(audio.duration); });
+  audio.addEventListener("timeupdate", () => {
+    curEl.textContent = fmt(audio.currentTime);
+    if (audio.duration) fill.style.width = (audio.currentTime / audio.duration * 100) + "%";
+  });
+  audio.addEventListener("play",  paintState);
+  audio.addEventListener("pause", paintState);
+  audio.addEventListener("ended", paintState);
+  audio.addEventListener("error", () => {
+    statusEl.textContent = "⚠ Áudio não carregou — confira o caminho do .mp3";
+  });
+
+  /* play / pause */
+  playBtn.addEventListener("click", () => {
+    if (audio.paused){
+      if (audio.ended) audio.currentTime = 0;
+      audio.play().catch(()=>{});
+    } else {
+      audio.pause();
+    }
+  });
+
+  /* silenciar / ativar som */
+  muteBtn.addEventListener("click", () => { audio.muted = !audio.muted; paintMute(); paintState(); });
+
+  /* ⏪ voltar / avançar 10 segundos */
+  backBtn.addEventListener("click", () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
+  fwdBtn .addEventListener("click", () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); });
+
+  /* 🖱️ clicar na barra pula para qualquer ponto (inclusive início) */
+  seekBar.addEventListener("click", e => {
+    const r = seekBar.getBoundingClientRect();
+    const pct = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    if (audio.duration) audio.currentTime = pct * audio.duration;
+  });
+
+  /* ---- AUTOPLAY COM SOM ---- */
+  function liberarSom(){
+    audio.muted = false; paintMute();
+    audio.play().then(paintState).catch(()=>{});
+    document.removeEventListener("click",    liberarSom, true);
+    document.removeEventListener("keydown",  liberarSom);
+    document.removeEventListener("touchend", liberarSom);
+  }
+
+  audio.muted = false; /* começa SEM estar no mudo */
+  audio.play().then(paintState).catch(() => {
+    /* navegador bloqueou autoplay: 1ª interação na página liga com som */
+    statusEl.textContent = "▶ Clique em qualquer lugar para ouvir com som";
+    document.addEventListener("click",    liberarSom, true);
+    document.addEventListener("keydown",  liberarSom);
+    document.addEventListener("touchend", liberarSom);
+  });
+})();
 
 /* ================= ROTAÇÃO DE DEPOIMENTOS ================= */
 let qi = 0, qTimer = null;
@@ -301,7 +371,7 @@ function initUI(){
   document.querySelectorAll(".menu a").forEach(a =>
     a.addEventListener("click", () => header && header.classList.remove("menu-open")));
 
-  /* ----- FORMULÁRIO DE CONTATO (envio real + e-mail formatado) ----- */
+  /* ----- FORMULÁRIO DE CONTATO ----- */
   const form = document.getElementById("formContato");
   if (form){
     form.addEventListener("submit", async e => {
@@ -311,10 +381,8 @@ function initUI(){
       btn.disabled = true;
       btn.textContent = "Enviando…";
 
-      // ✏️ E-mails que recebem a mensagem (deixe só os que quiser)
       const destinos = [
         "alexandre.costa@alfm.adv.br",
-        
       ];
 
       try {
@@ -355,7 +423,7 @@ initObservadores();
 initUI();
 if (document.getElementById("painelPauta")) simular();
 
-/* ================= DROPDOWN DO MENU "PÁGINA PRINCIPAL" ================= */
+/* ================= DROPDOWN DO MENU ================= */
 (function () {
   const dropdown = document.querySelector('.dropdown');
   const toggle   = document.getElementById('dropdownToggle');
@@ -369,7 +437,6 @@ if (document.getElementById("painelPauta")) simular();
     toggle.setAttribute('aria-expanded', isOpen);
   });
 
-  // Fecha o dropdown ao clicar fora
   document.addEventListener('click', function (e) {
     if (!dropdown.contains(e.target)) {
       dropdown.classList.remove('open');
@@ -377,7 +444,6 @@ if (document.getElementById("painelPauta")) simular();
     }
   });
 
-  // Fecha ao pressionar ESC
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       dropdown.classList.remove('open');
@@ -385,7 +451,6 @@ if (document.getElementById("painelPauta")) simular();
     }
   });
 
-  // Fecha quando um item do menu é clicado (útil em mobile)
   menu.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () {
       dropdown.classList.remove('open');
