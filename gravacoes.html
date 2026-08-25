@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#081726">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Gravações de Assembleias · Easy Voting</title>
+  <meta name="description" content="Biblioteca de sessões gravadas: AGOs e AGEs conduzidas pela Easy Voting, com filtros por tipo de assembleia.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="interna">
+  <!-- ARQUIVO: gravacoes.html -->
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="tk">● AO VIVO — AGE Torre Norte Capital em sessão</span><span class="tk-sep">◆</span>
+      <span class="tk">✓ BVD INCLUÍDO NO CICORP — AGO Alvorada S.A.</span><span class="tk-sep">◆</span>
+      <span class="tk">CONSOLIDAÇÃO AUTOMÁTICA — escrituradores Bradesco · Itaú · BTG</span><span class="tk-sep">◆</span>
+      <span class="tk">QUÓRUM PRÉVIO ACOMPANHADO — 68% do capital votante</span><span class="tk-sep">◆</span>
+      <span class="tk">▶ NOVA GRAVAÇÃO — AGO Itaúsa S.A.</span><span class="tk-sep">◆</span>
+      <span class="tk">● AO VIVO — AGE Torre Norte Capital em sessão</span><span class="tk-sep">◆</span>
+      <span class="tk">✓ BVD INCLUÍDO NO CICORP — AGO Alvorada S.A.</span><span class="tk-sep">◆</span>
+      <span class="tk">CONSOLIDAÇÃO AUTOMÁTICA — escrituradores Bradesco · Itaú · BTG</span><span class="tk-sep">◆</span>
+      <span class="tk">QUÓRUM PRÉVIO ACOMPANHADO — 68% do capital votante</span><span class="tk-sep">◆</span>
+      <span class="tk">▶ NOVA GRAVAÇÃO — AGO São Martinho S.A.</span><span class="tk-sep">◆</span>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="logo.png" alt="Logo Easy Voting">
+        <span class="brand-name">Easy Voting</span>
+        <span class="brand-sub mono">assembleias digitais</span>
+      </a>
+      <nav class="menu" id="menu" aria-label="Navegação principal">
+        <div class="dropdown">
+          <button class="dropdown-toggle" id="dropdownToggle" aria-expanded="false" aria-haspopup="true" aria-controls="dropdownMenu">
+            * Soluções
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="dropdown-menu" id="dropdownMenu" role="menu">
+            <li><a href="index.html#clientes" role="menuitem">Clientes</a></li>
+            <li><a href="plataforma.html" role="menuitem">Plataforma</a></li>
+            <li><a href="bvd.html" role="menuitem">BVD</a></li>
+            <li><a href="gravacoes.html" role="menuitem" aria-current="page">Gravações</a></li>
+            <li><a href="privacidade.html" role="menuitem">Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <a class="btn btn-sm" href="https://wa.me/551120500700?text=Ol%C3%A1!%20Quero%20agendar%20uma%20reuni%C3%A3o%20com%20a%20Easy%20Voting." target="_blank" rel="noopener">Agendar reunião</a>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">Biblioteca de sessões</p>
+        <h1><span>Gravações de assembleias já realizadas.</span></h1>
+        <p class="lead">Transparência total: cada sessão conduzida pela Easy Voting fica registrada e disponível, com filtros por tipo de assembleia.</p>
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO DO ACERVO (substitui os vídeos) ============ -->
+<style>
+  .acervo{
+    background:#edeff3 url("imagens/fundo-acervo.jpg") center / cover no-repeat;
+    padding:110px 0 120px;
+    color:#0e1626;
+  }
+  .acervo-inner{max-width:1100px;margin:0 auto;padding:0 24px;}
+  .acervo-eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;
+    letter-spacing:.22em;text-transform:uppercase;
+    color:#3fd4e2;margin:0 0 18px;
+  }
+  .acervo-title{
+    font-family:"Fraunces",serif;font-weight:500;
+    font-size:clamp(30px,4.6vw,52px);line-height:1.08;
+    margin:0 0 22px;color:#0e1626;
+  }
+  .acervo-title em{font-style:italic;color:#3fd4e2;}
+  .acervo-lead{
+    font-family:"Archivo",sans-serif;font-size:17px;line-height:1.7;
+    color:#3c465c;max-width:780px;margin:0 0 56px;
+  }
+  .acervo-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:28px;}
+  .acervo-card{
+    background:rgba(255,255,255,.78);
+    border:1px solid rgba(14,22,38,.08);
+    border-radius:18px;padding:28px 26px;
+    box-shadow:0 12px 30px rgba(14,22,38,.06);
+  }
+  .acervo-tag{
+    display:inline-block;font-family:"IBM Plex Mono",monospace;
+    font-size:11px;letter-spacing:.16em;color:#3fd4e2;
+    border:1px solid rgba(63,212,226,.35);background:rgba(63,212,226,.08);
+    border-radius:999px;padding:6px 12px;margin-bottom:16px;
+  }
+  .acervo-card h3{font-family:"Fraunces",serif;font-size:21px;font-weight:600;margin:0 0 10px;color:#0e1626;}
+  .acervo-card p{font-family:"Archivo",sans-serif;font-size:14.5px;line-height:1.65;color:#4a5468;margin:0;}
+  .acervo-note{
+    display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+    background:#0e1626;color:#eef2f8;border-radius:20px;
+    padding:26px 30px;box-shadow:0 24px 60px rgba(14,22,38,.25);
+  }
+  .acervo-note-icon{
+    flex:0 0 46px;width:46px;height:46px;border-radius:12px;
+    display:grid;place-items:center;
+    background:rgba(255,255,255,.08);color:#3fd4e2;
+  }
+  .acervo-note-icon svg{width:24px;height:24px;}
+  .acervo-note strong{font-family:"Archivo",sans-serif;font-size:16px;display:block;margin-bottom:4px;}
+  .acervo-note p{font-family:"Archivo",sans-serif;font-size:14px;line-height:1.6;color:#b9c2d4;margin:0;flex:1 1 380px;}
+  .acervo-btn{
+    margin-left:auto;white-space:nowrap;
+    font-family:"Archivo",sans-serif;font-weight:600;font-size:14px;
+    color:#0e1626;background:#3fd4e2;border-radius:999px;
+    padding:12px 22px;text-decoration:none;
+  }
+  .acervo-btn:hover{background:#9ce4c9;}
+  @media(max-width:860px){.acervo-cards{grid-template-columns:1fr;}}
+  @media(max-width:700px){.acervo-btn{margin-left:0;}}
+</style>
+
+<section class="acervo" id="gravacoes">
+  <div class="acervo-inner">
+    <p class="acervo-eyebrow">Acervo &amp; conformidade</p>
+    <h2 class="acervo-title">Cada assembleia é gravada e guardada com segurança. <em>Sob demanda da companhia.</em></h2>
+    <p class="acervo-lead">
+      Em respeito à confidencialidade das deliberações, os vídeos das assembleias não são publicados
+      neste site. Todas as sessões conduzidas pela Easy Voting são gravadas e preservadas em nosso
+      banco de dados seguro, permanecendo à disposição da companhia sempre que necessário —
+      conforme a legislação vigente e as normas da CVM.
+    </p>
+
+    <div class="acervo-cards">
+      <article class="acervo-card">
+        <span class="acervo-tag">AGO</span>
+        <h3>Assembleia Geral Ordinária</h3>
+        <p>Gravação integral da sessão, com registro fiel das deliberações, votações e quórum.</p>
+      </article>
+      <article class="acervo-card">
+        <span class="acervo-tag">AGE</span>
+        <h3>Assembleia Geral Extraordinária</h3>
+        <p>Registro completo e armazenamento confidencial, pronto para consulta da companhia.</p>
+      </article>
+      <article class="acervo-card">
+        <span class="acervo-tag">AGO/E</span>
+        <h3>Ordinária &amp; Extraordinária</h3>
+        <p>Sessões unificadas gravadas em arquivo único, com a mesma garantia de guarda.</p>
+      </article>
+    </div>
+
+    <div class="acervo-note">
+      <div class="acervo-note-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/>
+          <path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/>
+          <circle cx="12" cy="15.5" r="1.6" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div style="flex:1 1 380px;">
+        <strong>Acervo sob guarda segura.</strong>
+        <p>As gravações não são públicas: o acesso é disponibilizado à companhia mediante solicitação, conforme a legislação vigente e as normas da CVM.</p>
+      </div>
+      <a class="acervo-btn" href="contato.html">Solicitar acesso →</a>
+    </div>
+  </div>
+
+  <!-- Mantidos ocultos apenas para o script.js não gerar erro ao procurar os vídeos; nada aparece na tela -->
+  <div id="filtros" style="display:none" aria-hidden="true"></div>
+  <div id="vgrid" style="display:none" aria-hidden="true"></div>
+</section>
+<!-- ============ FIM DA SEÇÃO DO ACERVO ============ -->
+
+    <section class="cta-final">
+      <div class="wrap">
+        <p class="eyebrow">Próximo passo</p>
+        <h2>A sua próxima assembleia também pode ser assim.</h2>
+        <a class="btn" href="contato.html">Agendar uma reunião →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand brand-foot" href="index.html"><img class="brand-logo" src="logo.png" alt="Logo Easy Voting"><span class="brand-name">Easy Voting</span></a>
+        <p class="mono">Tecnologia e respaldo jurídico em um só lugar.</p>
+      </div>
+      <div>
+        <h4 class="mono">Contato</h4>
+        <a href="mailto:easyvoting@alfm.adv.br">easyvoting@alfm.adv.br</a>
+        <a href="tel:+551120500700">+55 11 2050-0700</a>
+      </div>
+      <div>
+        <h4 class="mono">Institucional</h4>
+        <a href="plataforma.html">Plataforma</a>
+        <a href="bvd.html">BVD</a>
+        <a href="gravacoes.html">Gravações</a>
+        <a href="privacidade.html">Política de Privacidade</a>
+      </div>
+    </div>
+    <div class="wrap footer-base mono">
+      <span>© 2026 Easy Voting · Assembleias Gerais Digitais</span>
+      <span>Conosco, seus dados estão protegidos.</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lb-close mono" id="lbClose">✕ Fechar (Esc)</button>
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-info"><h3 id="lbTitulo"></h3><p class="mono" id="lbMeta"></p></div>
+  </div>
+
+  <a class="whats-flutuante" role="button" href="https://wa.me/551120500700?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Easy%20Voting." target="_blank" rel="noopener" aria-label="Falar com a Easy Voting no WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
