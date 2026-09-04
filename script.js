@@ -382,7 +382,7 @@ function initUI(){
       btn.textContent = "Enviando…";
 
       const destinos = [
-        "alexandre.costa@alfm.adv.br",
+        "contato@easyvoting.com.br",
       ];
 
       try {
