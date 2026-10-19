@@ -4,6 +4,7 @@
    ============================================================ */
 
 const REDUZIDO = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const CONTACT_API_URL = "/api/contact";
 
 /* ✏️ 2) GRAVAÇÕES */
 const GRAVACOES = [
@@ -33,14 +34,6 @@ const EMPRESAS = [
   { nome:"Jsl S.A", tag:"Cia. Aberta", logo:"imagens/jsl.png" },
   { nome:"Sanepar", tag:"Cia. Aberta", logo:"imagens/sanepar.png" },
   { nome:"Magazine Luiza", tag:"Cia. Aberta", logo:"imagens/magalu.png" }
-];
-
-/* ✏️ 4) DEPOIMENTOS (rotação editorial) */
-const DEPOIMENTOS = [
-  { t:"O BVD foi incluído no CICORP e a consolidação dos votos saiu automática, com rastreabilidade total. Zero retrabalho.", a:"Mariana Duarte", r:"Head de RI · Magazine Luiza S.A." },
-  { t:"Advogados sêniores conduziram do edital à eleição dos Conselhos. Nunca vi uma assembleia tão tranquila.", a:"Carlos Menezes", r:"Diretor Jurídico · Grupo Alvorada S.A." },
-  { t:"As auditorias recorrentes de instituições financeiras deram ao compliance a segurança que exigíamos.", a:"Ana Paula Freitas", r:"CCO · Prisma Asset" },
-  { t:"Relatórios claros de status e quórum prévio elevaram o nível da nossa governança.", a:"João Carlos Lima", r:"CFO · Torre Norte Capital" }
 ];
 
 /* ================= LOGOS (grade) ================= */
@@ -247,31 +240,6 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") fecharVideo(
   });
 })();
 
-/* ================= ROTAÇÃO DE DEPOIMENTOS ================= */
-let qi = 0, qTimer = null;
-const qBox = document.getElementById("quoteBox");
-function pintaQuote(){
-  const d = DEPOIMENTOS[qi];
-  document.getElementById("quoteText").textContent = d.t;
-  document.getElementById("quoteAuthor").innerHTML = `<strong>${d.a}</strong> &nbsp;·&nbsp; ${d.r}`;
-  document.getElementById("qCount").textContent = `${qi+1} / ${DEPOIMENTOS.length}`;
-}
-function trocaQuote(n){
-  qi = (n + DEPOIMENTOS.length) % DEPOIMENTOS.length;
-  qBox.classList.add("troca");
-  setTimeout(() => { pintaQuote(); qBox.classList.remove("troca"); }, 260);
-}
-if (qBox){
-  pintaQuote();
-  document.getElementById("qPrev").addEventListener("click", () => trocaQuote(qi-1));
-  document.getElementById("qNext").addEventListener("click", () => trocaQuote(qi+1));
-  if (!REDUZIDO){
-    qTimer = setInterval(() => trocaQuote(qi+1), 8000);
-    qBox.addEventListener("mouseenter", () => clearInterval(qTimer));
-    qBox.addEventListener("mouseleave", () => { qTimer = setInterval(() => trocaQuote(qi+1), 8000); });
-  }
-}
-
 /* ================= PAINEL DE VOTAÇÃO ================= */
 const PAUTAS = [
   { n:"PAUTA 1/4", t:"Aprovação das demonstrações financeiras" },
@@ -378,40 +346,33 @@ function initUI(){
       e.preventDefault();
       if (!form.checkValidity()){ form.reportValidity(); return; }
       const btn = form.querySelector("button");
+      const status = document.getElementById("formOk");
       btn.disabled = true;
       btn.textContent = "Enviando…";
-
-      const destinos = [
-         "alexandre.costa@alfm.adv.br",
-         "paulo.brandao@alfm.adv.br",
-         "diane.oliveira@alfm.adv.br",
-         "anderson.koch@alfm.adv.br",
-      ];
+      status.textContent = "";
+      status.classList.remove("show", "form-error");
 
       try {
-        const resultados = await Promise.all(destinos.map(dest =>
-          fetch(`https://formsubmit.co/ajax/${dest}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Accept": "application/json" },
-            body: JSON.stringify({
-              _subject:  "🗳️ Nova solicitação de reunião — Easy Voting",
-              _template: "table",
-              _replyto:  form.email.value,
-              "Nome":        form.nome.value,
-              "E-mail":      form.email.value,
-              "Empresa":     form.organizacao.value,
-              "Mensagem":    form.mensagem.value,
-              "Recebido em": new Date().toLocaleString("pt-BR")
-            })
+        const resposta = await fetch(CONTACT_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            name: form.nome.value.trim(),
+            email: form.email.value.trim(),
+            organization: form.organizacao.value.trim(),
+            message: form.mensagem.value.trim()
           })
-        ));
-        if (!resultados.every(r => r.ok)) throw new Error("Falha no envio");
+        });
+        if (!resposta.ok) throw new Error(`Falha no envio (${resposta.status})`);
         btn.textContent = "Enviado ✓";
-        document.getElementById("formOk").classList.add("show");
+        status.textContent = "✓ Recebido! Retornaremos em até 1 dia útil.";
+        status.classList.add("show");
         form.reset();
       } catch (err) {
         btn.textContent = "Erro ao enviar ✕";
         console.error("Erro no envio:", err);
+        status.textContent = "Não foi possível enviar sua mensagem. Tente novamente mais tarde.";
+        status.classList.add("show", "form-error");
       }
       setTimeout(() => { btn.textContent = "Enviar solicitação"; btn.disabled = false; }, 3000);
     });
