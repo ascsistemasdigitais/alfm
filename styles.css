@@ -316,6 +316,8 @@ body.interna main{animation:entrar .5s var(--ease) both}
 .footer::before{content:"EASY VOTING";position:absolute;left:0;right:0;bottom:-.16em;font-family:var(--f-display);font-size:clamp(4rem,13vw,11rem);line-height:1;color:rgba(246,244,239,.045);letter-spacing:.02em;pointer-events:none;white-space:nowrap}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;align-items:start;padding:3.5rem 28px 2.5rem;position:relative}
 .brand-foot{color:var(--paper);margin-bottom:1rem}
+.footer-legal{margin-top:.8rem;max-width:38ch;font-size:.68rem;line-height:1.6;color:rgba(246,244,239,.55);overflow-wrap:anywhere}
+.footer-legal strong{color:rgba(246,244,239,.75);font-weight:500}
 .footer h4{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.1rem;font-weight:500}
 .footer a{display:block;text-decoration:none;padding:.3rem 0;font-size:.9rem;transition:color .25s}
 .footer a:hover{color:var(--cyan)}
