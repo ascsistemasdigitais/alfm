@@ -89,20 +89,23 @@
         <div>
           <p class="eyebrow reveal">Canais diretos</p>
           <h2 class="mask"><span>Fale com a nossa equipe</span></h2>
-          <p class="reveal">Preencha seus dados e continue a conversa com nossa equipe pelo WhatsApp.</p>
+          <p class="reveal">Preencha o formulário para enviar sua solicitação por e-mail. Nossa equipe retornará em até 1 dia útil.</p>
           <ul class="contato-lista mono reveal">
             <li><a href="#formContato">Envie uma mensagem pelo formulário</a></li>
             <li>+55 11 2050-0700</li>
+            <li>E-mail: contato@easyvoting.com.br</li>
             <li>Atendimento em todo o Brasil</li>
           </ul>
         </div>
-        <form class="form reveal" id="formContato" novalidate>
+        <form class="form reveal" id="formContato" action="https://formsubmit.co/Contato@easyvoting.com.br" method="POST">
           <div class="campo"><label class="mono" for="f-nome">Nome</label><input id="f-nome" name="nome" type="text" maxlength="120" required autocomplete="name"></div>
           <div class="campo"><label class="mono" for="f-org">Empresa / Companhia</label><input id="f-org" name="organizacao" type="text" maxlength="160" required></div>
+          <div class="campo"><label class="mono" for="f-email">E-mail</label><input id="f-email" name="_replyto" type="email" maxlength="254" required autocomplete="email"></div>
+          <div class="campo"><label class="mono" for="f-telefone">Telefone</label><input id="f-telefone" name="telefone" type="tel" maxlength="30" required autocomplete="tel"></div>
           <div class="campo"><label class="mono" for="f-msg">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" maxlength="5000" required></textarea></div>
-          <button class="btn btn-full" type="submit">Continuar pelo WhatsApp</button>
-          <p class="contact-privacy-note">O WhatsApp será aberto com sua mensagem preenchida. Confira e toque em Enviar no aplicativo. Consulte nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
-          <p class="form-ok mono" id="formOk" role="status" aria-live="polite"></p>
+          <input type="hidden" name="_subject" value="Nova solicitação pelo site Easy Voting">
+          <button class="btn btn-full" type="submit">Enviar solicitação</button>
+          <p class="contact-privacy-note">Seus dados serão enviados pelo FormSubmit para que nossa equipe responda. Consulte nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
         </form>
       </div>
     </section>
