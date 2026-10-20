@@ -4,7 +4,6 @@
    ============================================================ */
 
 const REDUZIDO = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const CONTACT_API_URL = "/api/contact";
 
 /* ✏️ 2) GRAVAÇÕES */
 const GRAVACOES = [
@@ -342,39 +341,25 @@ function initUI(){
   /* ----- FORMULÁRIO DE CONTATO ----- */
   const form = document.getElementById("formContato");
   if (form){
-    form.addEventListener("submit", async e => {
+    form.addEventListener("submit", e => {
       e.preventDefault();
       if (!form.checkValidity()){ form.reportValidity(); return; }
-      const btn = form.querySelector("button");
       const status = document.getElementById("formOk");
-      btn.disabled = true;
-      btn.textContent = "Enviando…";
-      status.textContent = "";
-      status.classList.remove("show", "form-error");
+      const nome = form.nome.value.trim();
+      const organizacao = form.organizacao.value.trim();
+      const mensagem = form.mensagem.value.trim();
+      const texto = [
+        "Olá! Gostaria de falar com a Easy Voting.",
+        `Nome: ${nome}`,
+        `Empresa / Companhia: ${organizacao}`,
+        `Mensagem: ${mensagem}`
+      ].join("\n");
+      const url = `https://wa.me/5511988948000?text=${encodeURIComponent(texto)}`;
 
-      try {
-        const resposta = await fetch(CONTACT_API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({
-            name: form.nome.value.trim(),
-            email: form.email.value.trim(),
-            organization: form.organizacao.value.trim(),
-            message: form.mensagem.value.trim()
-          })
-        });
-        if (!resposta.ok) throw new Error(`Falha no envio (${resposta.status})`);
-        btn.textContent = "Enviado ✓";
-        status.textContent = "✓ Recebido! Retornaremos em até 1 dia útil.";
-        status.classList.add("show");
-        form.reset();
-      } catch (err) {
-        btn.textContent = "Erro ao enviar ✕";
-        console.error("Erro no envio:", err);
-        status.textContent = "Não foi possível enviar sua mensagem. Tente novamente mais tarde.";
-        status.classList.add("show", "form-error");
-      }
-      setTimeout(() => { btn.textContent = "Enviar solicitação"; btn.disabled = false; }, 3000);
+      window.open(url, "_blank", "noopener,noreferrer");
+      status.textContent = "Se o WhatsApp abrir, confira os dados e toque em Enviar. A mensagem só será enviada após essa confirmação.";
+      status.classList.remove("form-error");
+      status.classList.add("show");
     });
   }
 }
