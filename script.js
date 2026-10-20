@@ -338,30 +338,6 @@ function initUI(){
   document.querySelectorAll(".menu a").forEach(a =>
     a.addEventListener("click", () => header && header.classList.remove("menu-open")));
 
-  /* ----- FORMULÁRIO DE CONTATO ----- */
-  const form = document.getElementById("formContato");
-  if (form){
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      if (!form.checkValidity()){ form.reportValidity(); return; }
-      const status = document.getElementById("formOk");
-      const nome = form.nome.value.trim();
-      const organizacao = form.organizacao.value.trim();
-      const mensagem = form.mensagem.value.trim();
-      const texto = [
-        "Olá! Gostaria de falar com a Easy Voting.",
-        `Nome: ${nome}`,
-        `Empresa / Companhia: ${organizacao}`,
-        `Mensagem: ${mensagem}`
-      ].join("\n");
-      const url = `https://wa.me/5511988948000?text=${encodeURIComponent(texto)}`;
-
-      window.open(url, "_blank", "noopener,noreferrer");
-      status.textContent = "Se o WhatsApp abrir, confira os dados e toque em Enviar. A mensagem só será enviada após essa confirmação.";
-      status.classList.remove("form-error");
-      status.classList.add("show");
-    });
-  }
 }
 
 /* ================= INICIALIZAÇÃO ================= */
