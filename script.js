@@ -39,9 +39,19 @@ const EMPRESAS = [
 function buildLogos(){
   const g = document.getElementById("logosGrid");
   if (!g) return;
-  g.innerHTML = EMPRESAS.map(e => `
-    <div class="logo-cell" title="${e.nome}">
-      ${e.logo ? `<img class="logo-img" src="${e.logo}" alt="${e.nome}">` : `<span class="logo-word">${e.nome}</span>`}
+  const metade = Math.ceil(EMPRESAS.length / 2);
+  const linhas = [EMPRESAS.slice(0, metade), EMPRESAS.slice(metade)];
+  const renderizarLogos = (empresas, duplicada = false) => empresas.map(e => `
+    <div class="logo-cell" title="${e.nome}" role="listitem">
+      ${e.logo ? `<img class="logo-img" src="${e.logo}" alt="${duplicada ? "" : e.nome}">` : `<span class="logo-word">${e.nome}</span>`}
+    </div>`).join("");
+
+  g.innerHTML = linhas.map((empresas, i) => `
+    <div class="logo-marquee-row" role="group" aria-label="Linha ${i + 1} de empresas">
+      <div class="logo-track ${i === 1 ? "logo-track-reverse" : ""}">
+        <div class="logo-group" role="list">${renderizarLogos(empresas)}</div>
+        <div class="logo-group" role="list" aria-hidden="true">${renderizarLogos(empresas, true)}</div>
+      </div>
     </div>`).join("");
 }
 
@@ -247,7 +257,8 @@ const PAUTAS = [
   { n:"PAUTA 4/4", t:"Eleição do Conselho Fiscal" }
 ];
 const META_QUORUM = 48;
-let pi = 1, V = { a:18, r:9, ab:5 }, presentes = 84;
+const VOTOS_INICIAIS = { a:14, r:7, ab:4 };
+let pi = 1, V = { ...VOTOS_INICIAIS }, presentes = 120;
 
 function renderVotos(){
   const { a, r, ab } = V, tot = a + r + ab || 1;
@@ -263,24 +274,24 @@ function renderVotos(){
 }
 
 function simular(){
-  if (REDUZIDO){ V = { a:64, r:23, ab:9 }; presentes = 96; renderVotos(); return; }
+  if (REDUZIDO){ renderVotos(); return; }
   renderVotos();
   setInterval(() => {
-    V.a  += Math.round(Math.random()*2);
-    V.r  += Math.round(Math.random()*1.4);
-    V.ab += Math.random() < .25 ? 1 : 0;
-    if (Math.random() < .3 && presentes < 120) presentes++;
+    if (V.a + V.r + V.ab < presentes){
+      const categoria = ["a", "r", "ab"][Math.floor(Math.random() * 3)];
+      V[categoria]++;
+    }
     renderVotos();
   }, 900);
   setInterval(() => {
     pi = (pi + 1) % PAUTAS.length;
-    V = { a:6, r:3, ab:2 };
+    V = { ...VOTOS_INICIAIS };
     document.getElementById("pautaNum").textContent = PAUTAS[pi].n;
     document.getElementById("pautaTitulo").textContent = PAUTAS[pi].t;
     const p = document.getElementById("painelPauta");
     p.classList.remove("flash"); void p.offsetWidth; p.classList.add("flash");
     renderVotos();
-  }, 9000);
+  }, 27000);
 }
 
 /* ================= OBSERVADORES ================= */
