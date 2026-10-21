@@ -173,14 +173,21 @@ h2{font-size:clamp(2rem,3.8vw,3.1rem);max-width:22ch}
 .statement{padding:7rem 0;border-bottom:1px solid var(--line)}
 .big{font-family:var(--f-display);font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.25;max-width:30ch;font-weight:500}
 
-/* ===== clientes (grade de relatório anual) ===== */
+/* ===== clientes (faixas animadas de logos) ===== */
 .clientes{padding-bottom:5rem}
-.logos-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.logo-cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:112px;display:grid;place-items:center;padding:1.4rem;background:var(--card)}
+.logos-grid{display:flex;flex-direction:column;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.logo-marquee-row{overflow:hidden}
+.logo-track{display:flex;width:max-content;animation:logos-left 38s linear infinite}
+.logo-track-reverse{animation-name:logos-right}
+.logos-grid:hover .logo-track,.logos-grid:focus-within .logo-track{animation-play-state:paused}
+.logo-group{display:flex;flex:none}
+.logo-cell{flex:0 0 240px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:124px;display:grid;place-items:center;padding:1.4rem;background:var(--card)}
 .logo-cell img,.logo-cell span{filter:grayscale(1);opacity:.6;transition:.35s}
 .logo-cell:hover img,.logo-cell:hover span{filter:grayscale(0);opacity:1}
-.logo-img{max-width:200px;max-height:64px;object-fit:contain}
+.logo-img{max-width:220px;max-height:72px;object-fit:contain}
 .logo-word{font-family:var(--f-display);font-weight:600;font-size:1.05rem;letter-spacing:.01em;text-align:center}
+@keyframes logos-left{to{transform:translateX(-50%)}}
+@keyframes logos-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .clientes-nota{font-size:.7rem;color:var(--faint);margin-top:1.6rem;letter-spacing:.04em}
 .clientes-nota code{background:var(--paper-2);padding:1px 6px;border-radius:2px;color:var(--ink)}
 
@@ -356,7 +363,6 @@ body.interna main{animation:entrar .5s var(--ease) both}
   .footer-grid{grid-template-columns:1fr 1fr}
   .selos-grid{grid-template-columns:repeat(3,1fr)}
   .selos-grid.cols-3{grid-template-columns:1fr 1fr}
-  .logos-grid{grid-template-columns:repeat(3,1fr)}
   .xrow{grid-template-columns:50px 1fr auto;gap:1.4rem}
   .xrow p{grid-column:2/3;grid-row:2}
 }
@@ -393,7 +399,6 @@ body.interna main{animation:entrar .5s var(--ease) both}
   .voto-row{grid-template-columns:64px 1fr 80px}
   .sec-head{padding-top:3.6rem}
   .selos-grid,.selos-grid.cols-3{grid-template-columns:1fr 1fr}
-  .logos-grid{grid-template-columns:1fr 1fr}
   .hero-chart{height:100px}
   .statement{padding:4.5rem 0}
   .quote-mark{left:0;top:-2.4rem;font-size:6rem}
@@ -411,10 +416,18 @@ body.interna main{animation:entrar .5s var(--ease) both}
 @media(max-width:380px){
   body{font-size:15px}
   .hero-title{font-size:2.2rem}
-  .selos-grid,.selos-grid.cols-3,.logos-grid{grid-template-columns:1fr}
+  .selos-grid,.selos-grid.cols-3{grid-template-columns:1fr}
   .voto-row{grid-template-columns:58px minmax(0,1fr) 58px}
   .voto-n{font-size:.62rem}
   .btn{padding:.8rem 1.1rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .logos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .logo-marquee-row,.logo-track,.logo-group{display:contents}
+  .logo-track{animation:none}
+  .logo-group[aria-hidden="true"]{display:none}
+  .logo-cell{flex:none}
 }
 
 @media(hover:none){
