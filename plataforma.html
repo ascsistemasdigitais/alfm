@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#081726">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Política de Privacidade — Easy Voting</title>
-  <meta name="description" content="Política de Privacidade da Easy Voting: como coletamos, usamos e protegemos os seus dados, em conformidade com a LGPD.">
+  <title>Plataforma — Easy Voting · Assembleias Gerais Digitais</title>
+  <meta name="description" content="Veja por dentro como uma sessão Easy Voting funciona: vídeo de apresentação, método da convocação à consolidação e segurança cibernética.">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="interna">
-  <!-- ARQUIVO: privacidade.html -->
+  <!-- ARQUIVO: plataforma.html -->
   <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
   <div class="ticker" aria-hidden="true">
@@ -48,10 +48,10 @@
           </button>
           <ul class="dropdown-menu" id="dropdownMenu" role="menu">
             <li><a href="index.html#clientes" role="menuitem">Clientes</a></li>
-            <li><a href="plataforma.html" role="menuitem">Plataforma</a></li>
+            <li><a href="plataforma.html" role="menuitem" aria-current="page">Plataforma</a></li>
             <li><a href="bvd.html" role="menuitem">BVD</a></li>
             <li><a href="gravacoes.html" role="menuitem">Gravações</a></li>
-            <li><a href="privacidade.html" role="menuitem" aria-current="page">Política de Privacidade</a></li>
+            <li><a href="privacidade.html" role="menuitem">Política de Privacidade</a></li>
           </ul>
         </div>
         <a href="contato.html">Contato</a>
@@ -65,48 +65,99 @@
 
     <section class="page-hero">
       <div class="wrap">
-        <p class="eyebrow">Institucional</p>
-        <h1><span>Política de Privacidade.</span></h1>
-        <p class="lead">Transparência no tratamento de dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).</p>
+        <p class="eyebrow">Apresentação</p>
+        <h1><span>Como uma sessão Easy Voting funciona por dentro.</span></h1>
+        <p class="lead">Ouça a apresentação e conheça o método completo: jornada pré-assembleia, BVD, consolidação dos votos e respaldo jurídico sênior.</p>
       </div>
     </section>
 
-    <section>
-      <div class="wrap prosa">
-        <p class="mono-small">Última atualização: outubro de 2026</p>
+    <!-- ===== ÁUDIO DE APRESENTAÇÃO ===== -->
+    <section class="apresentacao" id="apresentacao">
+      <div class="wrap cols">
+        <div class="col-sticky">
+          <p class="eyebrow reveal">Ouça em 2 minutos</p>
+          <h2 class="mask"><span>A sessão, ouvida por dentro</span></h2>
+          <p class="reveal">Aperte play para ouvir a apresentação. Nela você acompanha o fluxo completo.</p>
+          <ul class="check-list reveal">
+            <li>Edital de convocação, proposta da administração, manual de participação e BVD</li>
+            <li>Envio do BVD pelo CICORP/Empresas.NET e gestão dos cadastros recebidos</li>
+            <li>Consolidação automática e processamento centralizado dos votos recebidos dos escrituradores.</li>
+            <li>Advogados Parceiros da Alves Ferreira &amp; Mesquita em cada etapa</li>
+          </ul>
+        </div>
 
-        <h2>1. Controlador e abrangência</h2>
-        <p>O controlador dos dados pessoais tratados no contexto do Easy Voting é a EASYVOTING TECNOLOGIA DA INFORMACAO SOCIEDADE EMPRESARIA LIMITADA, inscrita no CNPJ sob o nº 57.511.568/0001-94. Esta política descreve o tratamento de dados no site e, quando aplicável, nos serviços de assembleias gerais digitais.</p>
+        <div class="col-video reveal">
+          <figure class="video-frame" id="audioApresentacao">
 
-        <h2>2. Dados tratados</h2>
-        <ul>
-          <li><strong>Contato:</strong> nome, empresa, e-mail, telefone e mensagem preenchidos no formulário;</li>
-          <li><strong>Dados de assembleias:</strong> informações cadastrais e documentos de acionistas e representantes, quando necessários aos serviços contratados;</li>
-          <li><strong>Dados técnicos:</strong> informações de acesso e do navegador que podem ser registradas pela hospedagem e pelos serviços externos utilizados.</li>
-        </ul>
+            <!-- ✏️ PLANO DE FUNDO: troque o caminho da imagem abaixo.
+                 Se não quiser imagem, apague a div .av-bg (fica só o degradê). -->
+            <div class="av-bg" style="background-image:url('imagens/fundo-audio.jpg')"></div>
+            <div class="av-shade"></div>
 
-        <h2>3. Finalidades e bases legais</h2>
-        <p>Os dados de contato preenchidos no formulário são enviados por meio do serviço FormSubmit ao endereço de contato da Easy Voting para receber, analisar e responder à solicitação, inclusive para preparar propostas. Também podemos tratar dados para executar serviços contratados e cumprir obrigações legais ou regulatórias. Conforme o contexto, as bases legais podem incluir procedimentos preliminares relacionados a contrato, execução de contrato, cumprimento de obrigação legal, exercício regular de direitos e legítimo interesse, observados os requisitos da LGPD.</p>
+            <!-- ✏️ Seu áudio -->
+            <audio id="audioPlayer" preload="auto" src="audios/apresentacao.mp3"></audio>
 
-        <h2>4. Segurança da informação</h2>
-        <p>Adotamos medidas técnicas e administrativas de segurança compatíveis com os dados tratados para protegê-los contra acessos não autorizados e situações acidentais ou ilícitas, nos termos da LGPD.</p>
-    
-        <h2>5. Armazenamento e retenção</h2>
-        <p>Os dados de contato são mantidos enquanto houver interesse legítimo ou até a revogação do consentimento. Os dados relativos a assembleias são conservados pelo prazo exigido pela legislação societária e tributária aplicável (geralmente 5 a 10 anos). Os registros de conexão (dados técnicos de acesso) são mantidos pelo prazo de 6 meses, conforme o art. 15 do Marco Civil da Internet (Lei nº 12.965/2014).</p>
+            <div class="av-ui">
+              <div class="av-wave" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
 
-        <h2>6. Direitos dos titulares</h2>
-        <p>Nos termos da LGPD, o titular pode solicitar confirmação da existência de tratamento, acesso, correção, anonimização, bloqueio, eliminação, portabilidade, informações sobre compartilhamento e revisão de decisões automatizadas, quando aplicável, além de revogar consentimento. As solicitações podem ser encaminhadas pelo canal abaixo.</p>
+              <div class="av-controls">
+                <button class="av-skip mono" id="avBack" aria-label="Voltar 10 segundos">−10s</button>
+                <button class="av-play" id="audioPlayBtn" aria-label="Reproduzir áudio">
+                  <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"/></svg>
+                </button>
+                <button class="av-skip mono" id="avFwd" aria-label="Avançar 10 segundos">+10s</button>
+              </div>
 
-        <h2>7. Encarregado e contato</h2>
-        <p>O encarregado pelo tratamento de dados pessoais é Paulo Roberto Brandão. Para exercer direitos ou encaminhar dúvidas sobre privacidade, utilize o <a href="contato.html#formContato">formulário de contato</a> e identifique a solicitação como “Privacidade/LGPD”, ou ligue para +55 11 2050-0700.</p>
+              <div class="av-bar" id="audioSeek" title="Clique para voltar ou avançar">
+                <div class="av-fill" id="audioProgress"></div>
+              </div>
+              <div class="av-time mono">
+                <span id="audioCurrent">0:00</span>
+                <span id="audioDuration">0:00</span>
+              </div>
 
-        <h2>8. Cookies e tecnologias semelhantes</h2>
-        <p>O formulário deste site é processado pelo FormSubmit, um serviço externo que encaminha os dados informados diretamente ao endereço de contato da Easy Voting. O envio ocorre no momento da submissão do formulário. Recomendamos a leitura dos termos e da política de privacidade do FormSubmit para entender como eles tratam esses dados.
-Este site não utiliza cookies próprios para fins de rastreamento, análise de comportamento (analytics) ou publicidade. No entanto, cookies estritamente necessários para o funcionamento técnico do site ou de serviços de terceiros (como proteção contra spam) podem ser ativados.
-Além disso, nossos provedores de hospedagem e serviços de infraestrutura podem registrar automaticamente dados técnicos (como endereço IP e dados de log do navegador) para garantir a segurança e a estabilidade do serviço, conforme suas respectivas políticas de privacidade.</p>
-        <p>   </p>
-     
-        <p>"Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças em nossos processos ou exigências legais. A data da 'Última atualização' no topo deste documento será revisada, e alterações significativas serão comunicadas por meio de aviso destacado no site."</p>
+              <div class="av-foot">
+                <span class="av-status mono" id="audioStatus">Clique para ouvir</span>
+                <button class="av-mute mono" id="audioMuteBtn">🔊 Silenciar</button>
+              </div>
+            </div>
+
+            <figcaption class="mono">APRESENTAÇÃO · 02:14</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MÉTODO ===== -->
+    <section class="metodo" id="metodo">
+      <div class="wrap cols">
+        <div class="col-sticky">
+          <p class="eyebrow reveal">Da convocação à consolidação</p>
+          <h2 class="mask"><span>Gestão integral: cuidamos de tudo nos bastidores</span></h2>
+          <div class="passo-grande reveal">
+            <span class="mono" id="passoNum">01</span>
+            <p id="passoNome">Jornada pré-assembleia</p>
+          </div>
+        </div>
+        <ol class="passos">
+          <li class="passo reveal" data-num="01" data-nome="Jornada pré-assembleia"><h3>Jornada pré-assembleia</h3><p>Elaboração do edital de convocação, proposta da administração, manual de participação e do boletim de voto a distância, com gestão do envio pelo Empresas.NET.</p></li>
+          <li class="passo reveal" data-num="02" data-nome="Acionistas e BVDs"><h3>Gestão de acionistas e BVDs</h3><p>Análise criteriosa da documentação apresentada pelo acionista, gestão dos cadastros e BVDs recebidos, contato e suporte aos acionistas e representantes.</p></li>
+          <li class="passo reveal" data-num="03" data-nome="Sessão e consolidação"><h3>Sessão ao vivo e consolidação dos votos</h3><p>Processamento automático dos mapas dos escrituradores — Bradesco, Itaú, BTG, entre outros — com consolidação integral, rastreabilidade e transparência.</p></li>
+          <li class="passo reveal" data-num="04" data-nome="Jurídico e governança"><h3>Jurídico especializado e governança</h3><p>Advogados seniores do escritório Alves Ferreira &amp; Mesquita conduzem cada etapa, incluindo a estratégia nas eleições dos Conselhos de Administração e Fiscal.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cta-final">
+      <div class="wrap">
+        <p class="eyebrow">Próximo passo</p>
+        <h2>Veja a plataforma operando uma assembleia sua.</h2>
+        <a class="btn" href="contato.html">Agendar uma reunião →</a>
       </div>
     </section>
   </main>
@@ -128,7 +179,7 @@ Além disso, nossos provedores de hospedagem e serviços de infraestrutura podem
         <a href="plataforma.html">Plataforma</a>
         <a href="bvd.html">BVD</a>
         <a href="gravacoes.html">Gravações</a>
-        <a href="privacidade.html" aria-current="page">Política de Privacidade</a>
+        <a href="privacidade.html">Política de Privacidade</a>
       </div>
     </div>
     <div class="wrap footer-base mono">
@@ -137,9 +188,15 @@ Além disso, nossos provedores de hospedagem e serviços de infraestrutura podem
     </div>
   </footer>
 
-    <a class="whats-flutuante" role="button" href="https://wa.me/5511988948000?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Easy%20Voting." target="_blank" rel="noopener" aria-label="Falar com a Easy Voting no WhatsApp">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lb-close mono" id="lbClose">✕ Fechar (Esc)</button>
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-info"><h3 id="lbTitulo"></h3><p class="mono" id="lbMeta"></p></div>
+  </div>
+
+  <a class="whats-flutuante" role="button" href="https://wa.me/5511988948000?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Easy%20Voting." target="_blank" rel="noopener" aria-label="Falar com a Easy Voting no WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893 0-3.18-1.26-6.24-3.48-8.413z"/>
     </svg>
   </a>
 
