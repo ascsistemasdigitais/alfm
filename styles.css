@@ -177,17 +177,17 @@ h2{font-size:clamp(2rem,3.8vw,3.1rem);max-width:22ch}
 .clientes{padding-bottom:5rem}
 .logos-grid{display:flex;flex-direction:column;border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .logo-marquee-row{overflow:hidden}
-.logo-track{display:flex;width:max-content;animation:logos-left 38s linear infinite}
+.logo-track{display:flex;width:max-content;animation:logos-left 32s linear infinite}
 .logo-track-reverse{animation-name:logos-right}
 .logos-grid:hover .logo-track,.logos-grid:focus-within .logo-track{animation-play-state:paused}
 .logo-group{display:flex;flex:none}
-.logo-cell{flex:0 0 240px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:124px;display:grid;place-items:center;padding:1.4rem;background:var(--card)}
+.logo-cell{flex:0 0 240px;width:240px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:124px;display:grid;place-items:center;padding:1.4rem;background:var(--card)}
 .logo-cell img,.logo-cell span{filter:grayscale(1);opacity:.6;transition:.35s}
 .logo-cell:hover img,.logo-cell:hover span{filter:grayscale(0);opacity:1}
 .logo-img{max-width:220px;max-height:72px;object-fit:contain}
 .logo-word{font-family:var(--f-display);font-weight:600;font-size:1.05rem;letter-spacing:.01em;text-align:center}
-@keyframes logos-left{to{transform:translateX(-50%)}}
-@keyframes logos-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes logos-left{to{transform:translateX(var(--logo-distance))}}
+@keyframes logos-right{from{transform:translateX(var(--logo-distance))}to{transform:translateX(0)}}
 .clientes-nota{font-size:.7rem;color:var(--faint);margin-top:1.6rem;letter-spacing:.04em}
 .clientes-nota code{background:var(--paper-2);padding:1px 6px;border-radius:2px;color:var(--ink)}
 
@@ -423,11 +423,11 @@ body.interna main{animation:entrar .5s var(--ease) both}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .logos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-  .logo-marquee-row,.logo-track,.logo-group{display:contents}
-  .logo-track{animation:none}
+  .logo-marquee-row{overflow:visible}
+  .logo-track{display:block;width:auto;animation:none}
+  .logo-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
   .logo-group[aria-hidden="true"]{display:none}
-  .logo-cell{flex:none}
+  .logo-cell{min-width:0}
 }
 
 @media(hover:none){
