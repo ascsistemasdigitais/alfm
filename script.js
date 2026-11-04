@@ -53,6 +53,11 @@ function buildLogos(){
         <div class="logo-group" role="list" aria-hidden="true">${renderizarLogos(empresas, true)}</div>
       </div>
     </div>`).join("");
+
+  g.querySelectorAll(".logo-track").forEach(track => {
+    const grupo = track.querySelector(".logo-group");
+    track.style.setProperty("--logo-distance", `-${grupo.offsetWidth}px`);
+  });
 }
 
 /* ================= GRAVAÇÕES ================= */
