@@ -344,6 +344,51 @@ function initUI(){
   const header = document.getElementById("header");
   if (header) addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 10), { passive:true });
 
+  const formContato = document.getElementById("formContato");
+  const formContatoStatus = document.getElementById("formContatoStatus");
+  if (formContato && formContatoStatus){
+    formContato.addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!formContato.reportValidity()) return;
+
+      const botao = formContato.querySelector('button[type="submit"]');
+      const textoBotao = botao?.textContent;
+      formContatoStatus.textContent = "";
+      formContatoStatus.classList.remove("show", "form-error");
+      formContato.setAttribute("aria-busy", "true");
+      if (botao){
+        botao.disabled = true;
+        botao.textContent = "Enviando...";
+      }
+
+      try{
+        const resposta = await fetch(formContato.action, {
+          method: "POST",
+          body: new FormData(formContato),
+          headers: { Accept: "application/json" }
+        });
+        const resultado = await resposta.json();
+        if (!resposta.ok || resultado.ok !== true){
+          throw new Error("O serviço não confirmou o envio.");
+        }
+
+        formContato.reset();
+        formContatoStatus.textContent = "Formulário enviado com sucesso! Nossa equipe entrará em contato.";
+      }catch(erro){
+        console.error("Não foi possível enviar o formulário de contato.", erro);
+        formContatoStatus.textContent = "Não foi possível enviar sua mensagem agora. Tente novamente em alguns instantes.";
+        formContatoStatus.classList.add("form-error");
+      }finally{
+        formContato.setAttribute("aria-busy", "false");
+        if (botao){
+          botao.disabled = false;
+          botao.textContent = textoBotao;
+        }
+        formContatoStatus.classList.add("show");
+      }
+    });
+  }
+
   const burger = document.getElementById("burger");
   if (burger && header){
     burger.addEventListener("click", () => {
