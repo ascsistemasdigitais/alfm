@@ -96,15 +96,16 @@
             <li>Atendimento em todo o Brasil</li>
           </ul>
         </div>
-        <form class="form reveal" id="formContato" action="https://formsubmit.co/alexandre.costa@alfm.adv.br" method="POST">
+        <form class="form reveal" id="formContato" action="https://formspree.io/f/xljjvwjq" method="POST">
           <div class="campo"><label class="mono" for="f-nome">Nome</label><input id="f-nome" name="nome" type="text" maxlength="120" required autocomplete="name"></div>
           <div class="campo"><label class="mono" for="f-org">Empresa / Companhia</label><input id="f-org" name="organizacao" type="text" maxlength="160" required></div>
-          <div class="campo"><label class="mono" for="f-email">E-mail</label><input id="f-email" name="_replyto" type="email" maxlength="254" required autocomplete="email"></div>
+          <div class="campo"><label class="mono" for="f-email">E-mail</label><input id="f-email" name="email" type="email" maxlength="254" required autocomplete="email"></div>
           <div class="campo"><label class="mono" for="f-telefone">Telefone</label><input id="f-telefone" name="telefone" type="tel" maxlength="30" required autocomplete="tel"></div>
           <div class="campo"><label class="mono" for="f-msg">Mensagem</label><textarea id="f-msg" name="mensagem" rows="4" maxlength="5000" required></textarea></div>
           <input type="hidden" name="_subject" value="Nova solicitação pelo site Easy Voting">
+          <p class="form-ok" id="formContatoStatus" role="status" aria-live="polite"></p>
           <button class="btn btn-full" type="submit">Enviar solicitação</button>
-          <p class="contact-privacy-note">Seus dados serão enviados pelo FormSubmit para que nossa equipe responda. Consulte nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
+          <p class="contact-privacy-note">Seus dados serão enviados pelo Formspree para que nossa equipe responda. Consulte nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
         </form>
       </div>
     </section>
