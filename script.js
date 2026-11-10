@@ -31,7 +31,7 @@ const EMPRESAS = [
   { nome:"Vamos", tag:"Cia. Aberta", logo:"imagens/vamos.png" },
   { nome:"Trisul", tag:"Holding", logo:"imagens/trisul.png" },
   { nome:"Jsl S.A", tag:"Cia. Aberta", logo:"imagens/jsl.png" },
-  { nome:"Sanepar", tag:"Cia. Aberta", logo:"imagens/sanepar.png" },
+  { nome:"Sanepar", tag:"Cia. Aberta", logo:"imagens/sanepar.png" }
   ];
 
 /* ================= LOGOS (grade) ================= */
