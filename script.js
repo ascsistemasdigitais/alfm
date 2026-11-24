@@ -170,6 +170,48 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") fecharVideo(
   const frame    = document.getElementById("audioApresentacao");
   if (!audio || !frame) return;
 
+  const fontesAudio = {
+    pt: "audios/apresentacao.mp3",
+    en: "Apresentação - Ingles.mp3"
+  };
+
+  let idiomaInicial = new URLSearchParams(window.location.search).get("lang");
+  if (idiomaInicial !== "en" && idiomaInicial !== "pt") {
+    try {
+      idiomaInicial = localStorage.getItem("easyVotingLanguage") || "pt";
+    } catch (erro) {
+      idiomaInicial = "pt";
+    }
+  }
+  idiomaInicial = idiomaInicial === "en" ? "en" : "pt";
+  if (audio.getAttribute("src") !== fontesAudio[idiomaInicial]) {
+    audio.src = fontesAudio[idiomaInicial];
+  }
+  audio.dataset.language = idiomaInicial;
+
+  function atualizarAudioIdioma(idioma) {
+    const novoIdioma = idioma === "en" ? "en" : "pt";
+    const novaFonte = fontesAudio[novoIdioma];
+    if (audio.dataset.language === novoIdioma) return;
+
+    const estavaTocando = !audio.paused && !audio.ended;
+    const tempoAnterior = audio.currentTime;
+    audio.dataset.language = novoIdioma;
+    audio.src = novaFonte;
+    audio.load();
+
+    const restaurarReproducao = () => {
+      if (isFinite(tempoAnterior) && tempoAnterior > 0) {
+        audio.currentTime = Math.min(tempoAnterior, audio.duration || tempoAnterior);
+      }
+      if (estavaTocando) audio.play().catch(() => {});
+      paintState();
+    };
+    audio.addEventListener("loadedmetadata", restaurarReproducao, { once: true });
+  }
+
+  window.atualizarAudioApresentacao = atualizarAudioIdioma;
+
   const playBtn  = document.getElementById("audioPlayBtn");
   const muteBtn  = document.getElementById("audioMuteBtn");
   const seekBar  = document.getElementById("audioSeek");
@@ -793,6 +835,9 @@ function atualizarLinksComIdioma() {
 function aplicarIdioma(idioma) {
   idiomaAtual = idioma === "en" ? "en" : "pt";
   document.documentElement.lang = idiomaAtual === "en" ? "en" : "pt-BR";
+  if (typeof window.atualizarAudioApresentacao === "function") {
+    window.atualizarAudioApresentacao(idiomaAtual);
+  }
   salvarIdiomaNaUrl();
   atualizarLinksComIdioma();
 
