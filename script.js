@@ -172,7 +172,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") fecharVideo(
 
   const fontesAudio = {
     pt: "audios/apresentacao.mp3",
-    en: "Apresentação - Ingles.mp3"
+    en: "audios/Apresentação - Ingles.mp3"
   };
 
   let idiomaInicial = new URLSearchParams(window.location.search).get("lang");
